@@ -1,0 +1,184 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "This is a user server.\n",
+    "version" : "1.0.0",
+    "title" : "Swagger Users"
+  },
+  "host" : "virtserver.swaggerhub.com",
+  "basePath" : "/MartialDuv/Gestion_utilisateurs/1.0.0",
+  "tags" : [ {
+    "name" : "user",
+    "description" : "Operations about user"
+  } ],
+  "schemes" : [ "https", "http" ],
+  "paths" : {
+    "/users" : {
+      "get" : {
+        "tags" : [ "user" ],
+        "summary" : "Get users",
+        "operationId" : "getUsers",
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "list of users",
+            "schema" : {
+              "type" : "array",
+              "items" : {
+                "type" : "object",
+                "properties" : {
+                  "FirstName" : {
+                    "type" : "string"
+                  },
+                  "LastName" : {
+                    "type" : "string"
+                  }
+                }
+              }
+            }
+          },
+          "204" : {
+            "description" : "error mongoDb"
+          }
+        }
+      }
+    },
+    "/user" : {
+      "post" : {
+        "tags" : [ "user" ],
+        "summary" : "Create user",
+        "description" : "Create a user",
+        "operationId" : "createUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "User",
+          "description" : "Created user object",
+          "required" : true,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "user created",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "204" : {
+            "description" : "error mongoDb"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "user" ],
+        "summary" : "Modify user",
+        "description" : "Modify a user",
+        "operationId" : "modifyUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "Users",
+          "description" : "user that needs to be modified and modification of the user",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/Users"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "user modified",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "204" : {
+            "description" : "error mongodb / error user not found"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "user" ],
+        "summary" : "Delete user",
+        "description" : "Delete a user",
+        "operationId" : "deleteUser",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "User",
+          "description" : "The user that needs to be deleted",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/User"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "user deleted",
+            "schema" : {
+              "$ref" : "#/definitions/User"
+            }
+          },
+          "204" : {
+            "description" : "error mongodb / error user not found"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "User" : {
+      "type" : "object",
+      "properties" : {
+        "FirstName" : {
+          "type" : "string"
+        },
+        "LastName" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "FirstName" : "FirstName",
+        "LastName" : "LastName"
+      }
+    },
+    "inline_response_200" : {
+      "properties" : {
+        "FirstName" : {
+          "type" : "string"
+        },
+        "LastName" : {
+          "type" : "string"
+        }
+      }
+    },
+    "Users" : {
+      "type" : "object",
+      "properties" : {
+        "FirstName" : {
+          "type" : "string"
+        },
+        "LastName" : {
+          "type" : "string"
+        },
+        "newFirstName" : {
+          "type" : "string"
+        },
+        "newLastName" : {
+          "type" : "string"
+        }
+      },
+      "example" : {
+        "FirstName" : "FirstName",
+        "newLastName" : "newLastName",
+        "LastName" : "LastName",
+        "newFirstName" : "newFirstName"
+      }
+    }
+  }
+}
